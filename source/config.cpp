@@ -4,33 +4,16 @@
 
 #include <Action/LambdaAction.h>
 #include <Hotkey/Hotkey.h>
+#include <Platform/Windows/Action/ExecuteFileAction.h>
+
+using CustomGlobalHotkeys::Hotkey::Hotkey;
+using CustomGlobalHotkeys::Action::TActionSharedPtr;
+using CustomGlobalHotkeys::Platform::Windows::Action::ExecuteFileAction;
 
 std::vector<Hotkey> CONFIG_HOTKEYS = {
 	{
-		MOD_ALT, 'S',
-		std::shared_ptr<Action>(new LambdaAction(
-			[]()
-			{ 
-				MessageBoxA(0, "XYZ", "123", MB_OK);
-			}
-		))
-	},
-	{
-		MOD_ALT, 'A',
-		std::shared_ptr<Action>(new LambdaAction(
-			[]()
-			{
-				MessageBoxA(0, "Ahahaa", "123", MB_OK);
-			}
-		))
-	},
-	{
-		0, VK_PAUSE,
-		std::shared_ptr<Action>(new LambdaAction(
-			[]()
-			{
-				MessageBoxA(0, "Pause hit", "123", MB_OK);
-			}
-		))
+		0, VK_PAUSE, new ExecuteFileAction(
+			L"E:\\Projects\\Workroom\\ODG\\Start Workspace.bat"
+		)
 	}
 };

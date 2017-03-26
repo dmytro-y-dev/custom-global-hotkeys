@@ -8,7 +8,7 @@ int WINAPI WinMain(
 	LPSTR lpCmdLine,
 	int nCmdShow
 ) {
-	return Main(
+	return CustomGlobalHotkeys::Platform::Windows::Main(
 		hInstance,
 		hPrevInstance,
 		lpCmdLine,

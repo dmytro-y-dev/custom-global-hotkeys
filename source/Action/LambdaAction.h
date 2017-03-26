@@ -2,18 +2,22 @@
 
 #include <functional>
 
-#include "Action.h"
+#include <Action/IAction.h>
 
-class LambdaAction : public Action
-{
-public:
-	typedef std::function<void()> TLambdaFunction;
+namespace CustomGlobalHotkeys {
+	namespace Action {
+		class LambdaAction : public IAction
+		{
+		public:
+			typedef std::function<void()> TLambdaFunction;
 
-public:
-	LambdaAction(TLambdaFunction function);
+		public:
+			LambdaAction(TLambdaFunction function);
 
-	virtual void execute() const;
+			virtual void execute() const;
 
-private:
-	TLambdaFunction m_function;
-};
+		private:
+			TLambdaFunction m_function;
+		};
+	}
+}

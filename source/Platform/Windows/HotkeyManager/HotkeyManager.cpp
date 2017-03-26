@@ -1,9 +1,13 @@
 #include "HotkeyManager.h"
 
+#include <windows.h>
+
 #include <stdexcept>
 #include <utility>
 
-#include <windows.h>
+using CustomGlobalHotkeys::Platform::Windows::HotkeyManager::HotkeyManager;
+using CustomGlobalHotkeys::Platform::Windows::Exception::Win32APIErrorException;
+using CustomGlobalHotkeys::Action::TActionSharedPtr;
 
 HotkeyManager::HotkeyManager(HWND associatedWindow) :
 	m_associatedWindow(associatedWindow),
@@ -37,7 +41,7 @@ THotkeyIdentifier HotkeyManager::registerHotkey(const Hotkey &hotkey)
 	return hotkeyId;
 }
 
-std::shared_ptr<Action> HotkeyManager::findActionByHotkey(THotkeyIdentifier id) const
+TActionSharedPtr HotkeyManager::findActionByHotkey(THotkeyIdentifier id) const
 {
 	auto hotkeyIter = m_hotkeys.find(id);
 

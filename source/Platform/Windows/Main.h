@@ -2,9 +2,15 @@
 
 #include <windows.h>
 
-int Main(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine,
-	int nCmdShow
-);
+namespace CustomGlobalHotkeys {
+	namespace Platform {
+		namespace Windows {
+			int Main(
+				HINSTANCE hInstance,
+				HINSTANCE hPrevInstance,
+				LPSTR lpCmdLine,
+				int nCmdShow
+			);
+		}
+	}
+} 

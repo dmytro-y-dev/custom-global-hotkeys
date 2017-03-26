@@ -1,5 +1,7 @@
 #include "Win32APIErrorException.h"
 
+using CustomGlobalHotkeys::Platform::Windows::Exception::Win32APIErrorException;
+
 Win32APIErrorException::Win32APIErrorException(DWORD errorCode) :
 	std::exception(), m_errorCode(errorCode)
 {

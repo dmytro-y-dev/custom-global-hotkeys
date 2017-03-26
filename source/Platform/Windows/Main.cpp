@@ -5,10 +5,19 @@
 #include <algorithm>
 
 #include <HotkeyManager/HotkeyManager.h>
-#include <Platform/Windows/TrayIcon.h>
+#include <Platform/Windows/TrayIcon/TrayIcon.h>
+#include <Platform/Windows/HotkeyManager/HotkeyManager.h>
 
 using std::cout;
 using std::vector;
+
+using CustomGlobalHotkeys::Hotkey::Hotkey;
+using CustomGlobalHotkeys::Action::TActionSharedPtr;
+using CustomGlobalHotkeys::Platform::Windows::HotkeyManager::HotkeyManager;
+
+using namespace CustomGlobalHotkeys::Platform::Windows::TrayIcon;
+
+extern vector<Hotkey> CONFIG_HOTKEYS;
 
 static HotkeyManager hotkeyManager;
 
@@ -17,9 +26,9 @@ static void RegisterBuiltinHotkeys(const vector<Hotkey>& builtInHotkeys)
 	std::for_each(
 		builtInHotkeys.begin(), builtInHotkeys.end(),
 		[](const Hotkey& hotkey)
-		{
-			hotkeyManager.registerHotkey(hotkey);
-		}
+	{
+		hotkeyManager.registerHotkey(hotkey);
+	}
 	);
 }
 
@@ -33,36 +42,42 @@ static void ListenToApplicationEvents()
 
 			THotkeyIdentifier hotkeyId = msg.wParam;
 
-			std::shared_ptr<Action> action = hotkeyManager.findActionByHotkey(hotkeyId);
+			TActionSharedPtr action = hotkeyManager.findActionByHotkey(hotkeyId);
 
 			if (action) {
 				action->execute();
 			}
-		} else {
+		}
+		else {
 			DispatchMessage(&msg);
 		}
 	}
 }
 
-int Main(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine,
-	int nCmdShow
-) {
-	extern vector<Hotkey> CONFIG_HOTKEYS;
-	RegisterBuiltinHotkeys(CONFIG_HOTKEYS);
+namespace CustomGlobalHotkeys {
+	namespace Platform {
+		namespace Windows {
+			int Main(
+				HINSTANCE hInstance,
+				HINSTANCE hPrevInstance,
+				LPSTR lpCmdLine,
+				int nCmdShow
+			) {
+				RegisterBuiltinHotkeys(CONFIG_HOTKEYS);
 
-	// Show application icon in tray when application starts working
+				// Show application icon in tray when application starts working
 
-	HWND dummyTrayWindow = CreateDummyTrayWindow(hInstance);
-	ShowApplicationIconInTray(dummyTrayWindow);
+				HWND dummyTrayWindow = CreateDummyTrayWindow(hInstance);
+				ShowApplicationIconInTray(dummyTrayWindow);
 
-	ListenToApplicationEvents();
+				ListenToApplicationEvents();
 
-	// Remove application icon from tray when application stops working
+				// Remove application icon from tray when application stops working
 
-	HideApplicationIconInTray(dummyTrayWindow);
+				HideApplicationIconInTray(dummyTrayWindow);
 
-	return 0;
+				return 0;
+			}
+		}
+	}
 }

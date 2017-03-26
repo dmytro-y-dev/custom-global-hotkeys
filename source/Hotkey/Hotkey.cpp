@@ -1,17 +1,33 @@
 #include "Hotkey.h"
 
+using CustomGlobalHotkeys::Hotkey::Hotkey;
+using CustomGlobalHotkeys::Action::TActionSharedPtr;
+
 Hotkey::Hotkey(
 	TKeyModifiers modifiers,
 	TVirtualKeyCode code,
-	std::shared_ptr<Action> action
-) :
+	TActionSharedPtr action
+):
 	m_modifiers(modifiers),
 	m_code(code),
 	m_action(std::move(action))
 {
 }
 
-std::shared_ptr<Action> Hotkey::getAction() const
+Hotkey::Hotkey(
+	TKeyModifiers modifiers,
+	TVirtualKeyCode code,
+	IAction* action
+):
+	Hotkey(
+		modifiers,
+		code,
+		TActionSharedPtr(action)
+	)
+{
+}
+
+TActionSharedPtr Hotkey::getAction() const
 {
 	return m_action;
 }
@@ -26,9 +42,9 @@ TKeyModifiers Hotkey::getModifiers() const
 	return m_modifiers;
 }
 
-void Hotkey::setAction(std::shared_ptr<Action> action)
+void Hotkey::setAction(TActionSharedPtr action)
 {
-	m_action = std::move(action);
+	m_action = action;
 }
 
 void Hotkey::setCode(TVirtualKeyCode code)
