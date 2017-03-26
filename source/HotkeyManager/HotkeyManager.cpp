@@ -18,21 +18,23 @@ HotkeyManager::~HotkeyManager()
 
 THotkeyIdentifier HotkeyManager::registerHotkey(const Hotkey &hotkey)
 {
-	THotkeyIdentifier nextHotkeyId = this->getNextHotkeyIdentifier();
+	THotkeyIdentifier hotkeyId = this->getNextHotkeyIdentifier();
 
 	// 1. Register hotkey using Win32 API call
 
-	if (RegisterHotKey(m_associatedWindow, nextHotkeyId, hotkey.getModifiers(), hotkey.getCode()) == 0) {
+	if (RegisterHotKey(m_associatedWindow, hotkeyId, hotkey.getModifiers(), hotkey.getCode()) == 0) {
 		throw Win32APIErrorException(GetLastError());
 	}
 
 	// 2. Add hotkey to list of known hotkeys
 
-	m_hotkeys.insert(std::make_pair(nextHotkeyId, hotkey));
+	m_hotkeys.insert(std::make_pair(hotkeyId, hotkey));
 
 	// 3. Calculate next hotkey identifier
 
 	this->advanceNextHotkeyIdentifier();
+
+	return hotkeyId;
 }
 
 std::shared_ptr<Action> HotkeyManager::findActionByHotkey(THotkeyIdentifier id) const
@@ -69,12 +71,18 @@ void HotkeyManager::unregisterHotkey(THotkeyIdentifier id)
 
 void HotkeyManager::unregisterAllHotkeys()
 {
-	for (
-		auto hotkeyIter = m_hotkeys.begin(), hotkeyIterLast = m_hotkeys.end();
-		hotkeyIter != hotkeyIterLast;
-		++hotkeyIter
-	) {
-		this->unregisterHotkey(hotkeyIter->first);
+	auto hotkeyIter = m_hotkeys.begin(), hotkeyIterLast = m_hotkeys.end();
+
+	while (hotkeyIter != hotkeyIterLast) {
+		THotkeyIdentifier hotkeyId = hotkeyIter->first;
+
+		// Call Win32 API to unregister hotkey
+
+		if (UnregisterHotKey(m_associatedWindow, hotkeyId) == 0) {
+			throw Win32APIErrorException(GetLastError());
+		}
+
+		hotkeyIter = m_hotkeys.erase(hotkeyIter);
 	}
 }
 

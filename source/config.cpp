@@ -23,5 +23,14 @@ std::vector<Hotkey> CONFIG_HOTKEYS = {
 				MessageBoxA(0, "Ahahaa", "123", MB_OK);
 			}
 		))
+	},
+	{
+		0, VK_PAUSE,
+		std::shared_ptr<Action>(new LambdaAction(
+			[]()
+			{
+				MessageBoxA(0, "Pause hit", "123", MB_OK);
+			}
+		))
 	}
 };
