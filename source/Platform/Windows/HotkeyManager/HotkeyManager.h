@@ -2,9 +2,9 @@
 
 #include <unordered_map>
 
-#include <Hotkey/Hotkey.h>
-#include <Hotkey/HotkeyTypes.h>
-#include <HotkeyManager/HotkeyManager.h>
+#include <Abstract/Hotkey/Hotkey.h>
+#include <Abstract/Hotkey/HotkeyTypes.h>
+#include <Abstract/HotkeyManager/HotkeyManager.h>
 #include <Platform/Windows/Exception/Win32APIErrorException.h>
 
 namespace CustomGlobalHotkeys {

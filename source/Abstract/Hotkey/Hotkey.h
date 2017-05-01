@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include <Action/IAction.h>
-#include <Hotkey/HotkeyTypes.h>
+#include <Abstract/Action/ActionInterface.h>
+#include <Abstract/Hotkey/HotkeyTypes.h>
 
 namespace CustomGlobalHotkeys {
 	namespace Hotkey {
 		class Hotkey
 		{
-		typedef CustomGlobalHotkeys::Action::IAction IAction;
+		typedef CustomGlobalHotkeys::Action::ActionInterface IAction;
 		typedef CustomGlobalHotkeys::Action::TActionSharedPtr TActionSharedPtr;
 
 		public:

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Action/IAction.h>
+#include <Abstract/Action/ActionInterface.h>
 
 namespace CustomGlobalHotkeys {
 	namespace Action {
-		class ExecuteFileAction : public IAction
+		class ExecuteFileAction : public ActionInterface
 		{
 		public:
 			ExecuteFileAction(

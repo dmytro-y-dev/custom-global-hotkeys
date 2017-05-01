@@ -4,14 +4,14 @@
 
 namespace CustomGlobalHotkeys {
 	namespace Action {
-		class IAction
+		class ActionInterface
 		{
 		public:
-			virtual ~IAction();
+			virtual ~ActionInterface() {}
 
 			virtual void execute() const = 0;
 		};
 
-		typedef std::shared_ptr<IAction> TActionSharedPtr;
+		typedef std::shared_ptr<ActionInterface> TActionSharedPtr;
 	}
 }

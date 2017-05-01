@@ -6,8 +6,7 @@
 #define WM_TRAYICON   (WM_USER + 1)
 #define MENUITEM_EXIT 5000
 
-static LPCSTR DummyTrayWindowClassName = "customGlobalHotkeysTrayDummyWindow";
-static LPCSTR TrayIconTitle = "(metamaker) Custom Global Hotkeys";
+static LPCSTR TrayIconTitle = "Custom Global Hotkeys";
 
 static UINT ShowPopupMenu(HWND hwnd)
 {
@@ -59,6 +58,8 @@ namespace CustomGlobalHotkeys {
 			namespace TrayIcon {
 				HWND CreateDummyTrayWindow(HINSTANCE hInstance)
 				{
+					LPCSTR DummyTrayWindowClassName = "customGlobalHotkeysTrayDummyWindow";
+
 					WNDCLASSEXA wnd;
 					memset(&wnd, 0, sizeof(wnd));
 

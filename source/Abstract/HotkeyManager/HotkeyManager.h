@@ -2,8 +2,8 @@
 
 #include <unordered_map>
 
-#include <Hotkey/Hotkey.h>
-#include <Hotkey/HotkeyTypes.h>
+#include <Abstract/Hotkey/Hotkey.h>
+#include <Abstract/Hotkey/HotkeyTypes.h>
 
 namespace CustomGlobalHotkeys {
 	namespace HotkeyManager {

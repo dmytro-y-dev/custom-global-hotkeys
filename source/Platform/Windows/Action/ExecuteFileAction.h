@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include <Action/ExecuteFileAction.h>
+#include <Abstract/Action/ExecuteFileAction.h>
 
 namespace CustomGlobalHotkeys {
 	namespace Platform {

@@ -2,6 +2,8 @@
 
 #include <Platform/Windows/Main.h>
 
+#include "Config.h"
+
 int WINAPI WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -12,7 +14,8 @@ int WINAPI WinMain(
 		hInstance,
 		hPrevInstance,
 		lpCmdLine,
-		nCmdShow
+		nCmdShow,
+		HOTKEYS_TO_REGISTER
 	);
 }
 

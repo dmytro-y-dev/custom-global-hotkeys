@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-#include <HotkeyManager/HotkeyManager.h>
+#include <Abstract/HotkeyManager/HotkeyManager.h>
 #include <Platform/Windows/TrayIcon/TrayIcon.h>
 #include <Platform/Windows/HotkeyManager/HotkeyManager.h>
 
@@ -16,8 +16,6 @@ using CustomGlobalHotkeys::Action::TActionSharedPtr;
 using CustomGlobalHotkeys::Platform::Windows::HotkeyManager::HotkeyManager;
 
 using namespace CustomGlobalHotkeys::Platform::Windows::TrayIcon;
-
-extern vector<Hotkey> CONFIG_HOTKEYS;
 
 static HotkeyManager hotkeyManager;
 
@@ -61,9 +59,10 @@ namespace CustomGlobalHotkeys {
 				HINSTANCE hInstance,
 				HINSTANCE hPrevInstance,
 				LPSTR lpCmdLine,
-				int nCmdShow
+				int nCmdShow,
+				const vector<Hotkey>& hotkeys
 			) {
-				RegisterBuiltinHotkeys(CONFIG_HOTKEYS);
+				RegisterBuiltinHotkeys(hotkeys);
 
 				// Show application icon in tray when application starts working
 

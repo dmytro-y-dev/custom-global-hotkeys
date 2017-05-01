@@ -2,11 +2,11 @@
 
 #include <functional>
 
-#include <Action/IAction.h>
+#include <Abstract/Action/ActionInterface.h>
 
 namespace CustomGlobalHotkeys {
 	namespace Action {
-		class LambdaAction : public IAction
+		class LambdaAction : public ActionInterface
 		{
 		public:
 			typedef std::function<void()> TLambdaFunction;
