@@ -8,7 +8,7 @@
 namespace CustomGlobalHotkeys {
 	namespace HotkeyManager {
 		/**
-		 * Hotkey registration manager registers and unregisters hotkeys using Win32 API calls.
+		 * Hotkey registration manager registers and unregisters hotkeys.
 		 */
 		class HotkeyManager
 		{
